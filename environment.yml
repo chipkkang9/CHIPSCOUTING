@@ -1,0 +1,12 @@
+name: scout
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - pyarrow
+  - scikit-learn
+  - lightgbm
+  - matplotlib
+  - pytorch
