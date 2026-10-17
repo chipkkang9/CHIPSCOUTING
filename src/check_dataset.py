@@ -83,7 +83,8 @@ def check_known_players(ds):
 
 def main():
     ds = pd.read_parquet(DATASET)
-    print(f"{DATASET.name}: {len(ds):,}행, {ds.shape[1]}열\n")
+    print(f"{DATASET.name}: {len(ds):,}행, {ds.shape[1]}열 (그중 유망주 {ds['is_prospect'].sum():,}행만 검사)\n")
+    ds = ds[ds["is_prospect"] == 1]
     check_coverage_over_time(ds)
     check_labels_over_time(ds)
     check_direction(ds)

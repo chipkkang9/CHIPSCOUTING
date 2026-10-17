@@ -1,8 +1,9 @@
 """1단계: 원본 CSV -> (선수, 기준일) 학습 테이블.
 
-매년 7월 1일을 기준일로 잡고, 그날 21세 이하이면서 최근 1년 안에 몸값이
-찍힌 선수를 한 행으로 만든다. 입력(feature)은 기준일 이전 정보만 쓰고,
-정답(label)은 기준일 3년 뒤의 몸값이다.
+매년 7월 1일을 기준일로 잡고, 그날 40세 이하이면서 최근 1년 안에 몸값이
+찍힌 선수를 한 행으로 만든다. 그중 21세 이하가 "유망주"(is_prospect=1)다.
+입력(feature)은 기준일 이전 정보만 쓰고, 정답(label)은 기준일 3년 뒤의 몸값이다.
+(기량 점수의 정답인 EA 평점은 01c_add_ea.py가 따로 붙인다.)
 
 원본: data/raw_salimt/ (Kaggle "5.7M+ Records - Most Comprehensive Football Dataset")
 
@@ -20,7 +21,8 @@ RAW = ROOT / "data" / "raw_salimt"
 
 FIRST_YEAR = 2012   # 2010~2011년은 3년 뒤 몸값이 없는 비율이 높아서 뺀다
 LAST_YEAR = 2025    # 2023년 이후는 정답이 없는 "현재 유망주" 행 (몸값이 2025년 9월까지 있다)
-MAX_AGE = 21
+MAX_AGE = 40          # 표에 넣는 나이 상한 (모든 현역 선수를 검색할 수 있게 넓혔다)
+PROSPECT_AGE = 21     # "유망주" 나이 상한. 평가와 스카우팅은 이 나이까지만 한다
 HORIZON_YEARS = 3
 YEAR = pd.Timedelta(days=365)
 VALUE_FLOOR = 10_000    # 몸값 기록이 없는 선수를 대회 수준 계산에 넣을 때 쓰는 최저값
@@ -203,6 +205,7 @@ def build_snapshot(year, players, vals, transfers, perf, data_end):
         future = last_before(vals, t_future)
         df["value_future"] = future.loc[future["date"] > t_future - YEAR, "value"]
 
+    df["is_prospect"] = (df["age"] <= PROSPECT_AGE).astype(int)
     df.insert(0, "snapshot_year", year)
     return df.reset_index(names="player_id")
 
@@ -238,6 +241,7 @@ def main():
     pd.set_option("display.width", 200)
     summary = ds.groupby("snapshot_year").agg(
         선수수=("player_id", "size"),
+        유망주수=("is_prospect", "sum"),
         정답있음=("has_label", "mean"),
         클럽있음=("club_id", lambda s: s.notna().mean()),
         리그수준있음=("league_level", lambda s: s.notna().mean()),

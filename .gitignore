@@ -1,4 +1,6 @@
 data/
 docs/
 models/
+web/
+.claude/
 __pycache__/
