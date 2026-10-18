@@ -236,15 +236,21 @@ CHIPSCOUTING/
 
 ## Data & Credits
 
-| 데이터 | 출처 | 쓰임 |
-|---|---|---|
-| 선수 기록 | Transfermarkt 기반 [공개 데이터셋](https://www.kaggle.com/datasets/xfkzujqjvx97n/football-datasets) (선수 9만 3천 명, 몸값 85만 건, 이적 110만 건, 출전 188만 건) | 입력 |
-| 기량 평가 | EA SPORTS FC / FIFA 평점 (sofifa 기반 Kaggle 데이터셋 3종) | 정답, 포지션 숙련도 |
-| 환율 | 유럽중앙은행(ECB) 기준 환율 | 몸값 표시 |
-| 선수 사진 (선택) | 위키데이터, 위키미디어 공용의 자유 라이선스 사진 | `--photos`로 받을 때만 촬영자, 라이선스와 함께 표시 |
-| 경기 세부 지표 | FBref 기반 5대 리그 기록 (Kaggle) | 실험에만 사용 |
+| 데이터 | 데이터셋 (올린 사람) | Kaggle 라이선스 | 쓰임 |
+|---|---|:---:|---|
+| 선수 기록 (Transfermarkt 기반) | [5.7M+ Records - Most Comprehensive Football Dataset](https://www.kaggle.com/datasets/xfkzujqjvx97n/football-datasets) (xfkzujqjvx97n) | CC0 1.0 | 모델 입력. 선수 9만 3천 명, 몸값 85만 건, 이적 110만 건, 출전 188만 건 |
+| EA 평점 FIFA 15 ~ FC 24 | [EA Sports FC 24 complete player dataset](https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset) (stefanoleone992) | CC0 1.0 | 정답과 직전 평점 (2014\~2023년) |
+| EA 평점 FC 25 (2025년 6월) | [Fifa/EA FC 25 player data from Sofifa (2025-06-03)](https://www.kaggle.com/datasets/aniss7/fifa-player-data-from-sofifa-2025-06-03) (aniss7) | MIT | 2025년 직전 평점, 포지션 목록 |
+| EA 평점 FC 26 (2025년 9월) | [FC 26 (FIFA 26) Player Data](https://www.kaggle.com/datasets/rovnez/fc-26-fifa-26-player-data) (rovnez) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | 2025년 평가, 포지션 숙련도 |
+| 경기 세부 지표 (FBref 기반) | [Top 5 League Football Player Stats (2017-2025)](https://www.kaggle.com/datasets/emrey3lmaz/top-5-league-football-player-stats-2017-2025) (emrey3lmaz) | CC0 1.0 | 실험에만 사용 |
 
-데이터, 학습된 모델, 만들어진 웹 페이지는 저장소에 넣지 않았습니다. 각 데이터의 권리는 원래 제공자에게 있습니다. 이 프로젝트는 개인 학습 프로젝트이며 EA, Transfermarkt, FBref와 관련이 없습니다.
+그 밖에 몸값 표시에는 유럽중앙은행(ECB) 기준 환율을 씁니다. 선수 사진은 `--photos`로 받을 때만 위키데이터와 위키미디어 공용의 자유 라이선스 사진을 촬영자, 라이선스와 함께 표시합니다.
+
+FC 26 데이터셋은 CC BY 4.0에 따라 출처를 밝히며, 선수 연결과 포지션 평점 정리를 위해 가공해서 썼습니다. Kaggle 라이선스는 각 데이터셋을 올린 사람이 붙인 것이고, 원래 데이터(EA 평점, Transfermarkt 기록 등)의 권리는 원래 제공자에게 있습니다. 데이터, 학습된 모델, 만들어진 웹 페이지는 저장소에 넣지 않았으며, 이 프로젝트는 돈을 벌지 않는 개인 학습 프로젝트입니다.
+
+> This project is not endorsed by or affiliated with EA or its licensors.
+>
+> 이 프로젝트는 EA, Transfermarkt, FBref의 승인을 받지 않았으며 이들과 관련이 없습니다.
 
 ## Limitations
 
